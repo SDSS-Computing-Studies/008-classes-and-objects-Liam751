@@ -22,63 +22,71 @@ constructor     - should require the student name, studentNumber and grade (in t
 """
 
 class student:
-
     name = ""
-    code = ""
-    grade = str()
+    studentNumber = ""
+    grade = 0
     courses = []
     grades = []
+    # properties should be listed first
 
-    def getCourses(self, lis):
-        self.courses = lis
-
-    def getGrades(self, *arg):
-        gr = []
-        for x in range(len(arg)):
-            gr.append(arg[x])
-        self.grades = gr
-
-    def __init__(self, name, code, grade): 
+    def __init__(self, name, studentNumber, grade, courses=[], grades=[]): # You will need to create your own input parameters for all methods
         self.name = name
-        self.code = code
+        self.studentNumber = studentNumber
         self.grade = grade
+        self.courses = courses
+        self.grades = grades
 
     def __del__(self):
-        pass
-
-    def average(self):
-        av = 0
-        for x in range(len(self.grades)):
-            av += self.grades[x]
-        return round(av / len(self.grades), 1)
+        print("Shutting down")
 
     def getHonorRoll(self):
-        lis = self.grades
-        lis.sort(reverse = True)
-        hr = 0
-        for x in range(5):
-            hr += lis[x]
-        ans = hr / 5
-        if ans >= 86:
+        x = self.grades
+        x.sort()
+        honorgrades = x[-1]+x[-2]+x[-3]+x[-4]+x[-5]
+        honorgrades = honorgrades/5
+        honorgrades = int(honorgrades)
+        if honorgrades >= 86:
             return True
         else:
             return False
-    
-    def showCourses(self):
-        print(self.courses)
 
-    def showGrade(self, x):
-        print(self.courses[x] + " " + self.grades[x])
+    def showCourses(self):
+        x = self.courses
+        y = print(self.courses)
+        return y
+
+    def showGrade(self, ind):
+        x = self.courses
+        courses = x[ind]
+        y = self.grades
+        grades = y[ind]
+        show = print("{} has a {}percent in {}.".format(self.name, str(grades), str(courses)))
+    
+    def getCourses(self, x):
+        self.courses = x
+    
+    def getGrades(self, y):
+        self.grades = y
+    
+    def average(self):
+        x = self.grades
+        y = len(x)
+        z = 0
+        for i in range(0,y):
+            a = x[i]
+            z = z+a
+        z = z/y
+        return z
 
 
 def main():
+    # This contains test data that will be used by the autograder.
+    # do not modify this function
 
     st1 = student("Anita Bath","91334",11)
     st1.getCourses( ["English","Math","PE","Computers","History","Biology","Japanese"] )
-    st1.getGrades( 91, 94, 87, 99, 82, 100, 73)
+    st1.getGrades( [91, 94, 87, 99, 82, 100, 73])
 
     st2 = student("Joe Lunchbox","12346", 11)
-    st1.getCourses( ["English","Math","Physics","Computers","Geography","Chemistry","French"] )
-    st1.getGrades( 71, 98, 93, 95, 68, 81, 71)
-
-main()
+    st2.getCourses( ["English","Math","Physics","Computers","Geography","Chemistry","French"] )
+    st2.getGrades( [71, 98, 93, 95, 68, 81, 71])
