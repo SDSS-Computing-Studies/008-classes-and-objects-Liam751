@@ -25,7 +25,7 @@ class student:
 
     name = ""
     code = ""
-    grade = int()
+    grade = str()
     courses = []
     grades = []
 
